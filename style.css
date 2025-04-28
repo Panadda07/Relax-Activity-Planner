@@ -1,0 +1,84 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #dbe6e4, #f1f5f2);
+    color: #3d5245;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    transition: background 0.5s ease;
+}
+
+main {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+}
+
+select {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    margin: 10px 0;
+    border: 1px solid #a8c3b0;
+    border-radius: 8px;
+    font-size: 1em;
+    background: #f7faf9;
+    color: #3d5245;
+    font-weight: 500;
+    transition: 0.3s;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg fill="%233d5245" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 24px;
+    cursor: pointer;
+}
+
+select:hover {
+    background-color: #c8ddd4;
+}
+
+select:focus {
+    outline: none;
+    border-color: #8bb49c;
+    box-shadow: 0 0 8px #c1e3d0;
+    background-color: #c8ddd4;
+}
+
+select:focus:not(:hover) {
+    background-color: #f7faf9;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    background: #2f684e;
+    color: #e6f5ec;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #24513d;
+    transform: scale(1.05);
+}
+
+.result {
+    margin-top: 20px;
+    background: rgba(139, 180, 156, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+    color: #3d5245;
+}

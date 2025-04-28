@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relax Activity Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<main>
+  <h1>Relax Activity Planner</h1>
+  <p>เลือกวัน ความรู้สึก และประเภทกิจกรรม เพื่อรับกิจกรรมผ่อนคลาย!</p>
+
+  <select id="day">
+    <option value="">เลือกวัน</option>
+    <option>จันทร์</option>
+    <option>อังคาร</option>
+    <option>พุธ</option>
+    <option>พฤหัสบดี</option>
+    <option>ศุกร์</option>
+    <option>เสาร์</option>
+    <option>อาทิตย์</option>
+  </select>
+
+  <select id="mood">
+    <option value="">เลือกความรู้สึก</option>
+    <option>มีความสุข</option>
+    <option>เครียด</option>
+    <option>เบื่อ</option>
+    <option>เหนื่อย</option>
+    <option>ตื่นเต้น</option>
+  </select>
+
+  <select id="activity-type">
+    <option value="">เลือกประเภทกิจกรรม</option>
+    <option>ทำคนเดียว</option>
+    <option>ทำกับเพื่อน</option>
+    <option>กิจกรรมกลางแจ้ง</option>
+    <option>กิจกรรมในบ้าน</option>
+  </select>
+
+  <button onclick="suggestActivity()">แนะนำกิจกรรม</button>
+
+  <div class="result" id="result-box">
+    <h3>กิจกรรมที่แนะนำ</h3>
+    <p id="suggested-activity"></p>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
