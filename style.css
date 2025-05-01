@@ -82,3 +82,89 @@ button:hover {
     display: none;
     color: #3d5245;
 }
+
+#calendar-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2f684e;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    z-index: 999;
+}
+
+#calendar-icon {
+    color: #fff;
+    font-size: 30px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar-table th,
+#calendar-table td {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#calendar-table td {
+    border: 1px solid #ddd;
+}
+
+#save-button {
+    font-size: 18px;
+    margin-top: 20px;
+    display: none;
+}
+
+#close-calendar {
+    background-color: #3d5245;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#close-calendar:hover {
+    background-color: #2e3c34;
+}

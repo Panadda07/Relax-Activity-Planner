@@ -1,3 +1,12 @@
+const suggestButton = document.getElementById("suggest-button");
+const resultDiv = document.getElementById("result");
+const logButton = document.getElementById("log-button");
+const calendarToggle = document.getElementById("calendar-toggle");
+const calendarModal = document.getElementById("calendar-modal");
+const saveButton = document.querySelector("button[onclick='saveActivity()']");
+const calendarTable = document.getElementById("calendar-table");
+const closeCalendarButton = document.getElementById("close-calendar");
+
 const activities = {
     "มีความสุข": {
         "ทำคนเดียว": ["วาดรูป", "อ่านหนังสือเล่มโปรด", "ทำขนม"],
@@ -66,6 +75,8 @@ const lastActivities = {
     activity: null,
     song: null
 };
+
+let savedActivities = [];
 
 function suggestActivity() {
     const day = document.getElementById('day').value;
@@ -142,5 +153,61 @@ function suggestActivity() {
 
     suggestedActivity.innerHTML = suggestionText;
     resultBox.style.display = "block";
+    document.getElementById("saveButton").style.display = "inline-block";
 }
-script.js
+
+function saveActivity() {
+    const day = document.getElementById('day').value;
+    const mood = document.getElementById('mood').value;
+    const activityType = document.getElementById('activity-type').value;
+    const suggestedActivity = document.getElementById('suggested-activity').innerHTML;
+
+    const activityEntry = {
+        date: day,
+        activity: suggestedActivity,
+        mood: mood,
+        activityType: activityType
+    };
+
+    savedActivities.push(activityEntry);
+    generateCalendar();
+
+    alert("กิจกรรมถูกบันทึกแล้ว!");
+}
+
+calendarToggle.addEventListener("click", () => {
+    calendarModal.style.display = "flex";
+    generateCalendar();
+    closeCalendarButton.style.display = "inline-block";
+});
+
+calendarModal.addEventListener("click", (e) => {
+    if (e.target === calendarModal) {
+        calendarModal.style.display = "none";
+        closeCalendarButton.style.display = "none";
+    }
+});
+
+closeCalendarButton.addEventListener("click", () => {
+    calendarModal.style.display = "none";
+    closeCalendarButton.style.display = "none";
+});
+
+function generateCalendar() {
+    calendarTable.innerHTML = "<tr><th>วันที่</th><th>กิจกรรม</th></tr>";
+    savedActivities.forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${entry.date}</td><td>${entry.activity}</td>`;
+        calendarTable.appendChild(row);
+    });
+}
+
+function getYouTubeVideoId(url) {
+    const urlObj = new URL(url);
+    if (urlObj.hostname === 'youtu.be') {
+        return urlObj.pathname.slice(1);
+    } else if (urlObj.hostname.includes('youtube.com')) {
+        return urlObj.searchParams.get('v');
+    }
+    return null;
+}
