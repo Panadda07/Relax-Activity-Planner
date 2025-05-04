@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>กิจกรรมที่บันทึกไว้</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .saved-container {
+      max-width: 1000px;
+    }
+
+    table {
+      table-layout: fixed;
+    }
+
+    td:nth-child(5) {
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="saved-container">
+    <h2>กิจกรรมที่เคยบันทึก</h2>
+    <table id="activityTable">
+      <thead>
+        <tr>
+          <th>วันที่</th>
+          <th>กิจกรรม</th>
+          <th>ความรู้สึก</th>
+          <th>แนวที่ต้องการ</th>
+          <th>ที่สุ่มได้</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="clearButtonWrapper" style="display: none;">
+        <button id="clearButton" onclick="clearActivities()">ลบกิจกรรมทั้งหมด</button>
+    </div>
+    
+    <div class="button-wrapper">
+        <button id="backButton" onclick="history.back()">ย้อนกลับ</button>
+    </div>           
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

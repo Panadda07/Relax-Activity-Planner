@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relax Activity Planner - Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Nunito&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="card">
+    <h1>Relax Activity Planner</h1>
+
+    <p class="subtitle">เลือกความรู้สึกและแนวเกมที่คุณต้องการ</p>
+
+    <div class="dropdowns">
+      <select id="mood">
+        <option value="">-- ความรู้สึก --</option>
+        <option value="เบื่อ อยากหาอะไรทำ">เบื่อ อยากหาอะไรทำ</option>
+        <option value="เหงา อยากหาเพื่อนเล่น">เหงา อยากหาเพื่อนเล่น</option>
+        <option value="อยากหนีโลกไปในเกม">อยากหนีโลกไปในเกม</option>
+      </select>
+
+      <select id="genre">
+        <option value="">-- แนวเกม --</option>
+        <option value="เกมคลายเครียด">เกมคลายเครียด</option>
+        <option value="เกมใช้สมอง">เกมใช้สมอง</option>
+        <option value="เกมเล่นกับเพื่อน">เกมเล่นกับเพื่อน</option>
+        <option value="เกมผจญภัย">เกมผจญภัย</option>
+      </select>
+    </div>
+
+    <button onclick="recommendGame()">สุ่มเกม</button>
+
+    <div id="result" class="result-box">
+      <p>กรุณาเลือกทั้งสองตัวเลือก</p>
+    </div>
+
+    <div class="card-buttons">
+      <button id="saveButton" onclick="saveActivity()" style="display: none;">บันทึกกิจกรรม</button>
+      <button id="backButton" onclick="history.back()">ย้อนกลับ</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+
+  <a href="saveactivity.html" id="calendarButton">
+    📅
+  </a>
+</body>
+</html>

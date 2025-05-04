@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relax Activity Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Nunito&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="card">
+    <h1>Relax Activity Planner</h1>
+
+    <p class="subtitle">เลือกความรู้สึกและแนวเพลงที่คุณต้องการ</p>
+
+    <div class="dropdowns">
+        <select id="mood">
+            <option value="">-- ความรู้สึก --</option>
+            <option value="เพลงน่ารักเหมือนแกเลย">เพลงน่ารักเหมือนแกเลย</option>
+            <option value="ใครอยากเป็นแค่เพื่อนแก">ใครอยากเป็นแค่เพื่อนแก</option>
+            <option value="เขาทำไว้ดีหรือเธอแค่ไม่ลืม">เขาทำไว้ดีหรือเธอแค่ไม่ลืม</option>
+        </select>          
+
+        <select id="genre">
+            <option value="">-- แนวเพลง --</option>
+            <option value="ไทย">ไทย</option>
+            <option value="สากล">สากล</option>
+            <option value="R&B">R&B</option>
+            <option value="T-Pop">T-Pop</option>
+          </select>                
+    </div>
+
+    <button onclick="recommendSong()">สุ่มเพลง</button>
+
+    <div id="result" class="result-box">
+        <p>กรุณาเลือกทั้งสองตัวเลือก</p>
+      </div>
+
+    <div class="card-buttons">
+        <button id="saveButton" onclick="saveActivity()" style="display: none;">บันทึกกิจกรรม</button>
+        <button id="backButton" onclick="history.back()">ย้อนกลับ</button>
+      </div>
+  </div>
+  <script src="script.js"></script>
+
+  <a href="saveactivity.html" id="calendarButton">
+    📅
+  </a>
+</body>
+</html>
