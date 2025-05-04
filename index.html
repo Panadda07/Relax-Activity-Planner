@@ -1,65 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Relax Activity Planner</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&family=Nunito&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main>
+  <div class="card">
+    <img src="cloud.png" alt="cloud icon" class="icon" />
     <h1>Relax Activity Planner</h1>
-    <p>เลือกวัน ความรู้สึก และประเภทกิจกรรม เพื่อรับกิจกรรมผ่อนคลาย!</p>
 
-    <select id="day">
-      <option value="">เลือกวัน</option>
-      <option>จันทร์</option>
-      <option>อังคาร</option>
-      <option>พุธ</option>
-      <option>พฤหัสบดี</option>
-      <option>ศุกร์</option>
-      <option>เสาร์</option>
-      <option>อาทิตย์</option>
-    </select>
+    <p class="subtitle">งานวางแผนกิจกรรมคลายเครียด</p>
 
-    <select id="mood">
-      <option value="">เลือกความรู้สึก</option>
-      <option>มีความสุข</option>
-      <option>เครียด</option>
-      <option>เบื่อ</option>
-      <option>เหนื่อย</option>
-      <option>ตื่นเต้น</option>
-    </select>
-
-    <select id="activity-type">
-      <option value="">เลือกประเภทกิจกรรม</option>
-      <option>ทำคนเดียว</option>
-      <option>ทำกับเพื่อน</option>
-      <option>กิจกรรมกลางแจ้ง</option>
-      <option>กิจกรรมในบ้าน</option>
-    </select>
-    <button onclick="suggestActivity()">แนะนำกิจกรรม</button>
-
-    <div class="result" id="result-box">
-      <h3>กิจกรรมที่แนะนำ</h3>
-      <p id="suggested-activity"></p>
+    <div class="index-buttons">
+      <button onclick="startPlanning()">เริ่มวางแผน</button>
     </div>
-    <button id="saveButton" onclick="saveActivity()" style="display: none;">บันทึกกิจกรรม</button>
-  </main>
 
-  <button id="calendar-toggle">
-    <span id="calendar-icon">&#128197;</span>
-  </button>
-
-  <div class="modal" id="calendar-modal">
-    <div class="modal-content">
-        <h2>บันทึกกิจกรรมที่ผ่านมา</h2>
-        <table id="calendar-table"></table>
-        <button id="close-calendar">ปิด</button>
+    <div class="hidden-buttons" id="hidden-buttons" style="display: none;">
+      <button onclick="goToGame()">สุ่มเกม</button>
+      <button onclick="goToMusic()">สุ่มเพลง</button>
     </div>
+
+    <img src="flower.png" alt="flower" class="decor flower" />
+    <img src="cat.png" alt="cat" class="decor cat" />
   </div>
 
   <script src="script.js"></script>
+
+  <a href="saveactivity.html" id="calendarButton">
+    📅
+  </a>
 </body>
 </html>

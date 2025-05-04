@@ -1,213 +1,275 @@
-const suggestButton = document.getElementById("suggest-button");
-const resultDiv = document.getElementById("result");
-const logButton = document.getElementById("log-button");
-const calendarToggle = document.getElementById("calendar-toggle");
-const calendarModal = document.getElementById("calendar-modal");
-const saveButton = document.querySelector("button[onclick='saveActivity()']");
-const calendarTable = document.getElementById("calendar-table");
-const closeCalendarButton = document.getElementById("close-calendar");
-
-const activities = {
-    "มีความสุข": {
-        "ทำคนเดียว": ["วาดรูป", "อ่านหนังสือเล่มโปรด", "ทำขนม"],
-        "ทำกับเพื่อน": ["ปาร์ตี้เล็กๆ", "เล่นบอร์ดเกม", "ดูหนังด้วยกัน"],
-        "กิจกรรมกลางแจ้ง": ["ปั่นจักรยาน", "เดินเล่นสวนสาธารณะ", "ไปเที่ยวทะเล"],
-        "กิจกรรมในบ้าน": ["ดูซีรีส์", "ทำงานศิลปะ", "ทำโยคะเบาๆ"]
+const musicLibrary = {
+    "เพลงน่ารักเหมือนแกเลย": {
+      "ไทย": [
+        { name: "เจ้าหนู - Polycat", url: "https://youtu.be/UweO1ICBR9o?si=Qv0OphhTtqS9Zv9F" },
+        { name: "รอยยิ้ม - scrubb", url: "https://youtu.be/czvDyFfVoVU?si=Ir3UBBqdFobayeRz" },
+        { name: "อยากมองเธอในแง่ร้าย", url: "https://youtu.be/NxzPg5WmJUs?si=5mZ5aUKFBrD8FQGL" },
+        { name: "หินหยดลงน้ำ - YENTED", url: "https://youtu.be/oPnjEiwH0Vk?si=OugjySzQ19ilWpC0" },
+        { name: "สวนดอกไม้ - jaei", url: "https://youtu.be/54P5SlHSKYI?si=o05kilA2cLniV8NP" }
+      ],
+      "สากล": [
+        { name: "Casual", url: "https://youtu.be/fACfypWLqXg?si=0wo2hJMkanTkO5_V" },
+        { name: "once upon a time - jeff bernat", url: "https://youtu.be/UuaIGT-ZlWA?si=roXaWRdguolAkxWY" },
+        { name: "Too Good", url: "https://youtu.be/W7O03rIvP3w?si=PvenbrKgWjoEGnO9" },
+        { name: "magic", url: "https://youtu.be/eNVpmZM2XDA?si=DFGZKKbo3xO-O5Sc" },
+        { name: "complicated - the millennial club", url: "https://youtu.be/CKL5YY9-p_Y?si=IoFVuDdt5XB4hzPR" }
+      ],
+      "R&B": [
+        { name: "camped - rini", url: "https://youtu.be/YsBR5xGP96Y?si=vIeA8HDqRAWgmTS2" },
+        { name: "everyday feels like sunday", url: "https://youtu.be/wyexaEZIow8?si=ItP9Jbeheu-CyxuC" },
+        { name: "forget about you", url: "https://youtu.be/gT_P-eFB8rc?si=X3nFHz50kIGi4GSV" },
+        { name: "love never felt so good", url: "https://youtu.be/0wnuTGGuAVs?si=QlyLX3Tbx0eiWtla" },
+        { name: "( I like ) the way you love me", url: "https://youtu.be/qWr8M7zwkME?si=Dn5jxLg-4q2jP0QH" }
+      ],
+      "T-Pop": [
+        { name: "รู้งี้เป็นแฟนกับเธอนานแล้ว", url: "https://youtu.be/5wunh46uVKY?si=3scayLXyUCcmylc7" },
+        { name: "เกินต้าน", url: "https://youtu.be/9zXeLZTBd80?si=z5xIBk5ErT_ATW_a" },
+        { name: "someone someday", url: "https://youtu.be/Vo95UQIonOw?si=B-kaLbwF70Pv9jl5" },
+        { name: "ที่รักครับ", url: "https://youtu.be/ugpmgunWxUU?si=Cj66JjNSFIzWqfwx" },
+        { name: "ลอง", url: "https://youtu.be/QBtIJe9db5Y?si=rDssrXc9JxIMKPCZ" }
+      ]
     },
-    "เครียด": {
-        "ทำคนเดียว": ["นั่งสมาธิ", "ฟังเพลงผ่อนคลาย", "ระบายสี", "ปลูกต้นไม้ในกระถาง"],
-        "ทำกับเพื่อน": ["ไปนวดสปา", "ทำกิจกรรมระบายอารมณ์", "เล่นเกมคลายเครียด"],
-        "กิจกรรมกลางแจ้ง": ["เดินเล่นช้าๆ", "ดูพระอาทิตย์ตก", "ทำสมาธิในสวน"],
-        "กิจกรรมในบ้าน": ["ฟังเสียงธรรมชาติ", "อ่านหนังสือแนวปลุกใจ", "นอนพัก"]
+    "ใครอยากเป็นแค่เพื่อนแก": {
+      "ไทย": [
+        { name: "เพื่อน", url: "https://youtu.be/NmTG5wuAgUA?si=DtjF6cJLI1xHuL7I" },
+        { name: "POLYCAT - Chapter 1 เพื่อนไม่จริง", url: "https://youtu.be/DNIDBbjqFCo?si=KdHvo67H0S8oCfm-" },
+        { name: "POLYCAT - เพื่อนพระเอก | GOODFELLA", url: "https://youtu.be/tgQpUTDBI1A?si=mLChOklRVfY32WL9" },
+        { name: "The Parkinson - เพื่อนรัก (Dear Friend)", url: "https://youtu.be/EPZfaGPP3cA?si=rlTBld6grCXQTyUJ" },
+        { name: "เพื่อนดีเด่น (BEST FRIEND 4EVER) - SERIOUS BACON", url: "https://youtu.be/fMKwJnqtaBA?si=_cUHYNEu4X7SoKyE" }
+      ],
+      "สากล": [
+        { name: "Dhruv - double take", url: "https://youtu.be/R8FHtIhWqNo?si=rPQ8EW0s6dNCr5eh" },
+        { name: "Honesty - Pink Sweat$", url: "https://youtu.be/UnsCOkyTaak?si=9ak1jv066bLrFLcx" },
+        { name: "Numcha - Keep Cold", url: "https://youtu.be/g8z3rLjmFUc?si=ah5ArJmqJqOLqL8W" },
+        { name: "Adrian Milanio - Over & Over", url: "https://youtu.be/AIDmlfRALDg?si=m7tkv7YJTU7ATGVM" },
+        { name: "Taylor Swift - Teardrops On My Guitar", url: "https://youtu.be/xKCek6_dB0M?si=VfuLg5q2vpT4l3iO" }
+      ],
+      "R&B": [
+        { name: "Waste No Time", url: "https://youtu.be/XuHKxnR5XfU?si=mpyNQhrXGfWIGLYO" },
+        { name: "WIM - Snacks & Wine", url: "https://youtu.be/4mQAZgV9_AM?si=mUphMWvPd1XarKi8" },
+        { name: "i confess - Rangga Jones", url: "https://youtu.be/RuDUd8T4MOI?si=UjgRZMi_8JGqCZac" },
+        { name: "Thoughts", url: "https://youtu.be/_COj7dvkw4U?si=RRWrsn2NBJTqQc5f" },
+        { name: "More And More - Finding Hope", url: "https://youtu.be/V1FUwo-UmN8?si=wWnyqAoFHM9gJhsY" }
+      ],
+      "T-Pop": [
+        { name: "bamm - ใครเพื่อนแก", url: "https://youtu.be/yOwwa4wjuJ0?si=fwTuShqWOnfayAGg" },
+        { name: "เธอ ๆ เพื่อนเราชอบ (Guess Who?) – SERIOUS BACON", url: "https://youtu.be/wGFRGiG_TKM?si=dx1-32MTukUvtN6F" },
+        { name: "เพื่อนแบบใด ( I See It ) - JMNK", url: "https://youtu.be/zmnKk5ppMqg?si=E6HllrpHLGWQLCkN" },
+        { name: "แค่ไหนแค่นั้น (NO MATTER WHAT)", url: "https://youtu.be/FuadV-aiigQ?si=31jYz5WOEtz4EpCC" },
+        { name: "The Parkinson - Onlyfan", url: "https://youtu.be/37vuU29ccWk?si=fQ7unpxStONVGMSD" }
+      ]
     },
-    "เบื่อ": {
-        "ทำคนเดียว": ["เรียนรู้อะไรใหม่ๆ", "ฟังเพลงผ่อนคลาย", "ลองเขียนไดอารี่"],
-        "ทำกับเพื่อน": ["ตั้ง challenge ท้ากัน", "แข่งทำอาหาร", "ไปคาเฟ่แปลกๆ"],
-        "กิจกรรมกลางแจ้ง": ["เที่ยวสถานที่ใหม่ๆ", "ออกกำลังกายแบบสนุกๆ", "ขับรถเล่น"],
-        "กิจกรรมในบ้าน": ["เริ่มโปรเจกต์ DIY", "เล่นเกมออนไลน์", "ดูหนังต่างประเทศ"]
-    },
-    "เหนื่อย": {
-        "ทำคนเดียว": ["ฟัง podcast", "นอนกลางวัน", "อาบน้ำอุ่น"],
-        "ทำกับเพื่อน": ["คุยสบายๆกับเพื่อน", "กินขนมด้วยกัน", "ทำสปากับเพื่อน"],
-        "กิจกรรมกลางแจ้ง": ["ไปเดินห้าง", "เดินเล่นสวนเล็กๆ", "ปิกนิกเบาๆ"],
-        "กิจกรรมในบ้าน": ["ดูคลิปตลก", "เล่นแมว", "เปิดเพลงชิลล์ๆ"]
-    },
-    "ตื่นเต้น": {
-        "ทำคนเดียว": ["ลอง extreme sport เบาๆ", "ถ่าย vlog", "ตั้งเป้าหมายใหม่"],
-        "ทำกับเพื่อน": ["ไปสวนสนุก", "ทำกิจกรรม adventure", "เล่นเกม VR ด้วยกัน"],
-        "กิจกรรมกลางแจ้ง": ["ปีนหน้าผา", "ไปล่องแก่ง", "เที่ยวธรรมชาติแบบมันส์ๆ"],
-        "กิจกรรมในบ้าน": ["เล่นเกมที่ใช้พลังงาน", "ลองเต้นตามคลิป", "เล่นเกม escape room แบบตั้งเองในบ้าน"]
+    "เขาทำไว้ดีหรือเธอแค่ไม่ลืม": {
+      "ไทย": [
+        { name: "TATTOO COLOUR - รถไฟ", url: "https://youtu.be/tk4IVP-JuhI?si=oTHCwzBZGeaQcq-R" },
+        { name: "POLYCAT - มันเป็นใคร", url: "https://youtu.be/PFRJvHXaNBk?si=TH7dosKXeSq-SmOm" },
+        { name: "ต่อให้ - Season Five", url: "https://youtu.be/F9uqDmIEw8c?si=dH77ZKKlf2JjM3PT" },
+        { name: "POLYCAT - ข้อความรูปยิ้ม", url: "https://youtu.be/lBhIgPGCgbI?si=2ruFRyDg4gcBykdU" },
+        { name: "Chilling Sunday - คนเก่าเขาทำไว้ดี", url: "https://open.spotify.com/track/1qkIG72UU08DBiLyCL3vLH?si=EavmoVYsTVuvAX9Xk6bXtA" }
+      ],
+      "สากล": [],
+      "R&B": [],
+      "T-Pop": []
     }
 };
 
-const moodSongs = {
-    "เครียด": [
-        { name: "รอยยิ้ม - scrubb", url: "https://youtu.be/czvDyFfVoVU?si=YdeeolOKu0QjG2v7" },
-        { name: "CHI MI FT. GUNNER - YOUNGGU", url: "https://youtu.be/EpqaMKAaoTY?si=nSXW1xY5AopyKcFo" },
-        { name: "Raindrop - 1MILL", url: "https://youtu.be/4OR3uPXAih4?si=fvdtdXdYyXwTRStk" }
-    ],
-    "เบื่อ": [
-        { name: "ลาลาลอย - THE TOYS", url: "https://youtu.be/jdiRSOkzQns?si=XYxP7Yo1g6n1e3bK" },
-        { name: "เพื่อนเล่น ไม่เล่นเพื่อน - Tilly Birds Feat. MILLI", url: "https://youtu.be/AJEoJYgktb4?si=g4eTpK7drL5EYbtl" },
-        { name: "ถ้าเราเจอกันอีก (Until Then) - Tilly Birds", url: "https://youtu.be/zwvv71slEYc?si=jfwGvAP5HcoMe7mr" }
-    ],
-    "เหนื่อย": [
-        { name: "ระบายมา (paint the pain) - พัด Vorapat x JIXGO", url: "https://youtu.be/m6ipHazDxKs?si=Sl0e40dlx4BNNz3x" },
-        { name: "ฮีลใจ (heal jai) - JIXGO version ", url: "https://youtu.be/O7JVYSsEehU?si=gakfa6eykq9nVQZx" },
-        { name: "OPharrell Williams - Happy", url: "https://youtu.be/ZbZSe6N_BXs?si=prXnHDrZjeiSQygg" }
-    ],
+const gameLibrary = {
+    "เบื่อ อยากหาอะไรทำ": {
+      "เกมคลายเครียด": [
+        { name: "Stardew Valley", url: "https://store.steampowered.com/app/413150/Stardew_Valley/" },
+        { name: "PowerWash Simulator", url: "https://store.steampowered.com/app/1290000/PowerWash_Simulator/" },
+        { name: "Unpacking", url: "https://store.steampowered.com/app/1135690/Unpacking/" }
+      ],
+      "เกมใช้สมอง": [
+        { name: "The Witness", url: "https://store.steampowered.com/app/210970/The_Witness/" },
+        { name: "Baba Is You", url: "https://store.steampowered.com/app/736260/Baba_Is_You/" },
+        { name: "Portal 2", url: "https://store.steampowered.com/app/620/Portal_2/" }
+      ],
+      "เกมเล่นกับเพื่อน": [
+        { name: "Keep Talking and Nobody Explodes", url: "https://store.steampowered.com/app/341800/Keep_Talking_and_Nobody_Explodes/" },
+        { name: "Pummel Party", url: "https://store.steampowered.com/app/880940/Pummel_Party/" },
+        { name: "Human: Fall Flat", url: "https://store.steampowered.com/app/477160/Human_Fall_Flat/" }
+      ],
+      "เกมผจญภัย": [
+        { name: "A Short Hike", url: "https://store.steampowered.com/app/1055540/A_Short_Hike/" },
+        { name: "Firewatch", url: "https://store.steampowered.com/app/383870/Firewatch/" },
+        { name: "Journey", url: "https://store.steampowered.com/app/638230/Journey/" }
+      ]
+    },
+    "เหงา อยากหาเพื่อนเล่น": {
+      "เกมเล่นกับเพื่อน": [
+        { name: "Overcooked! 2", url: "https://store.steampowered.com/app/728880/Overcooked_2/" },
+        { name: "Among Us", url: "https://store.steampowered.com/app/945360/Among_Us/" },
+        { name: "Phasmophobia", url: "https://store.steampowered.com/app/739630/Phasmophobia/" }
+      ],
+      "เกมคลายเครียด": [
+        { name: "Golf With Your Friends", url: "https://store.steampowered.com/app/431240/Golf_With_Your_Friends/" },
+        { name: "Wobbly Life", url: "https://store.steampowered.com/app/1401310/Wobbly_Life/" },
+        { name: "Totally Reliable Delivery Service", url: "https://store.steampowered.com/app/1011670/Totally_Reliable_Delivery_Service/" }
+      ],
+      "เกมใช้สมอง": [
+        { name: "We Were Here", url: "https://store.steampowered.com/app/582500/We_Were_Here/" },
+        { name: "Tick Tock: A Tale for Two", url: "https://store.steampowered.com/app/790740/Tick_Tock_A_Tale_for_Two/" },
+        { name: "Escape Simulator", url: "https://store.steampowered.com/app/1435790/Escape_Simulator/" }
+      ],
+      "เกมผจญภัย": [
+        { name: "It Takes Two", url: "https://store.steampowered.com/app/1426210/It_Takes_Two/" },
+        { name: "Sea of Thieves", url: "https://store.steampowered.com/app/1172620/Sea_of_Thieves/" },
+        { name: "Raft", url: "https://store.steampowered.com/app/648800/Raft/" }
+      ]
+    },
+    "อยากหนีโลกไปในเกม": {
+      "เกมผจญภัย": [
+        { name: "Hollow Knight", url: "https://store.steampowered.com/app/367520/Hollow_Knight/" },
+        { name: "Spiritfarer", url: "https://store.steampowered.com/app/972660/Spiritfarer/" },
+        { name: "Ori and the Will of the Wisps", url: "https://store.steampowered.com/app/1057090/Ori_and_the_Will_of_the_Wisps/" }
+      ],
+      "เกมคลายเครียด": [
+        { name: "Kind Words (lo fi chill beats to write to)", url: "https://store.steampowered.com/app/1070710/Kind_Words_lo_fi_chill_beats_to_write_to/" },
+        { name: "Eastshade", url: "https://store.steampowered.com/app/715560/Eastshade/" },
+        { name: "Cats Organized Neatly", url: "https://store.steampowered.com/app/1513120/Cats_Organized_Neatly/" }
+      ],
+      "เกมเล่นกับเพื่อน": [
+        { name: "Don't Starve Together", url: "https://store.steampowered.com/app/322330/Dont_Starve_Together/" },
+        { name: "Project Zomboid", url: "https://store.steampowered.com/app/108600/Project_Zomboid/" },
+        { name: "Valheim", url: "https://store.steampowered.com/app/892970/Valheim/" }
+      ],
+      "เกมใช้สมอง": [
+        { name: "The Talos Principle", url: "https://store.steampowered.com/app/257510/The_Talos_Principle/" },
+        { name: "Outer Wilds", url: "https://store.steampowered.com/app/753640/Outer_Wilds/" },
+        { name: "Return of the Obra Dinn", url: "https://store.steampowered.com/app/653530/Return_of_the_Obra_Dinn/" }
+      ]
+    }
 };
-
-const moodMovies = {
-    "เบื่อ": [
-        { name: "Brooklyn Nine-Nine", url: "https://www.netflix.com/title/70281562" },
-        { name: "A Love So Beautiful", url: "https://www.netflix.com/title/81354739" },
-        { name: "Twenty-Five Twenty-One", url: "https://www.netflix.com/title/81517168" }
-    ],
-    "มีความสุข": [
-        { name: "Brooklyn Nine-Nine", url: "https://www.netflix.com/title/70281562" },
-        { name: "A Love So Beautiful", url: "https://www.netflix.com/title/81354739" },
-        { name: "Twenty-Five Twenty-One", url: "https://www.netflix.com/title/81517168" }
-    ]
-};
-
-const lastActivities = {
-    activity: null,
-    song: null
-};
-
-let savedActivities = [];
-
-function suggestActivity() {
-    const day = document.getElementById('day').value;
-    const mood = document.getElementById('mood').value;
-    const activityType = document.getElementById('activity-type').value;
-
-    const resultBox = document.getElementById('result-box');
-    const suggestedActivity = document.getElementById('suggested-activity');
-
-    if (!day || !mood || !activityType) {
-        suggestedActivity.innerText = "กรุณาเลือกให้ครบทั้งวัน ความรู้สึก และประเภทกิจกรรมก่อนนะ!";
-        resultBox.style.display = "block";
-        return;
+  
+function recommendGame() {
+    const mood = document.getElementById("mood").value;
+    const genre = document.getElementById("genre").value;
+    const result = document.getElementById("result");
+    const saveButton = document.getElementById("saveButton");
+  
+    if (!mood || !genre) {
+      result.textContent = "กรุณาเลือกทั้งสองตัวเลือก";
+      saveButton.style.display = "none";
+      return;
     }
-
-    const moodActivities = activities[mood];
-    if (!moodActivities) {
-        suggestedActivity.innerText = "ไม่พบกิจกรรมที่เหมาะสม ลองเลือกใหม่ดูนะ!";
-        resultBox.style.display = "block";
-        return;
+  
+    const games = gameLibrary[mood]?.[genre];
+    if (!games || games.length === 0) {
+      result.textContent = "ยังไม่มีกิจกรรมในหมวดนี้";
+      saveButton.style.display = "none";
+      return;
     }
+  
+    const randomIndex = Math.floor(Math.random() * games.length);
+    const game = games[randomIndex];
+    result.innerHTML = `ขอแนะนำ<br><a href="${game.url}" target="_blank">${game.name}</a>`;
+    saveButton.style.display = "inline-block";
+}
 
-    const activityList = moodActivities[activityType];
-    if (!activityList) {
-        suggestedActivity.innerText = "ไม่พบกิจกรรมที่เหมาะสม ลองเลือกใหม่ดูนะ!";
-        resultBox.style.display = "block";
-        return;
+function recommendSong() {
+    const mood = document.getElementById("mood").value;
+    const genre = document.getElementById("genre").value;
+    const result = document.getElementById("result");
+    const saveButton = document.getElementById("saveButton");
+  
+    if (!mood || !genre) {
+      result.textContent = "กรุณาเลือกทั้งสองตัวเลือก";
+      saveButton.style.display = "none";
+      return;
     }
-
-    let availableActivities = activityList.filter(a => a !== lastActivities.activity);
-    if (availableActivities.length === 0) {
-        availableActivities = [...activityList];
+  
+    const songs = musicLibrary[mood]?.[genre];
+    if (!songs || songs.length === 0) {
+      result.textContent = "ยังไม่มีเพลงในหมวดนี้";
+      saveButton.style.display = "none";
+      return;
     }
-    const randomIndex = Math.floor(Math.random() * availableActivities.length);
-    const activity = availableActivities[randomIndex];
-    lastActivities.activity = activity;
+  
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    const song = songs[randomIndex];
+    result.innerHTML = `ขอแนะนำ<br><a href="${song.url}" target="_blank">${song.name}</a>`;
+    saveButton.style.display = "inline-block";
+}
 
-    let suggestionText = `คุณรู้สึก${mood} เราแนะนำให้ "${activity}" นะ!`;
+function startPlanning() {
+document.querySelector('.index-buttons').style.display = 'none';
+document.getElementById('hidden-buttons').style.display = 'flex';
+}
 
-    if (activity === "เล่นบอร์ดเกม") {
-        suggestionText += `<br><br>คุณสามารถดูบอร์ดเกมที่แนะนำได้ที่ <b><a href="https://www.wongnai.com/articles/application-board-game" target="_blank" style="color: #3d5245; text-decoration: none;">ที่นี่</a></b>`;
-    }
+function goToGame() {
+window.location.href = "game.html";
+}
 
-    if (activity.includes("เพลง")) {
-        const songs = moodSongs[mood];
-        if (songs && songs.length > 0) {
-            let availableSongs = songs.filter(s => s.name !== lastActivities.song);
-            if (availableSongs.length === 0) {
-                availableSongs = [...songs];
-            }
-            const randomSong = availableSongs[Math.floor(Math.random() * availableSongs.length)];
-            lastActivities.song = randomSong.name;
-
-            const videoId = getYouTubeVideoId(randomSong.url);
-
-            suggestionText += `
-                <br><br>เพลงที่เหมาะกับอารมณ์ "${mood}" คือ
-                <br><b><a href="${randomSong.url}" target="_blank" style="color: #3d5245; text-decoration: none;">${randomSong.name}</a></b>
-            `;
-        }
-    }
-
-    if (activity.includes("ดูหนังต่างประเทศ") || activity.includes("ดูซีรีส์")) {
-        const movies = moodMovies[mood];
-        if (movies && movies.length > 0) {
-            const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-
-            suggestionText += `
-                <br><br>ซีรีส์และหนังที่แนะนำสำหรับอารมณ์ "${mood}" คือ
-                <br><b><a href="${randomMovie.url}" target="_blank" style="color: #3d5245; text-decoration: none;">${randomMovie.name}</a></b>
-            `;
-        }
-    }
-
-    suggestedActivity.innerHTML = suggestionText;
-    resultBox.style.display = "block";
-    document.getElementById("saveButton").style.display = "inline-block";
+function goToMusic() {
+window.location.href = "song.html";
 }
 
 function saveActivity() {
-    const day = document.getElementById('day').value;
     const mood = document.getElementById('mood').value;
-    const activityType = document.getElementById('activity-type').value;
-    const suggestedActivity = document.getElementById('suggested-activity').innerHTML;
+    const genre = document.getElementById('genre').value;
+    const suggestedActivity = document.getElementById('result').innerHTML;
+
+    const today = new Date().toISOString().split('T')[0];
+
+    let activityType = "อื่น ๆ";
+    const path = window.location.pathname;
+    if (path.includes("song.html")) {
+        activityType = "เพลง";
+    } else if (path.includes("game.html")) {
+        activityType = "เกม";
+    }
 
     const activityEntry = {
-        date: day,
+        date: today,
         activity: suggestedActivity,
         mood: mood,
+        genre: genre,
         activityType: activityType
     };
 
+    const savedActivities = JSON.parse(localStorage.getItem('savedActivities')) || [];
     savedActivities.push(activityEntry);
-    generateCalendar();
+    localStorage.setItem('savedActivities', JSON.stringify(savedActivities));
 
     alert("กิจกรรมถูกบันทึกแล้ว!");
 }
 
-calendarToggle.addEventListener("click", () => {
-    calendarModal.style.display = "flex";
-    generateCalendar();
-    closeCalendarButton.style.display = "inline-block";
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const tableBody = document.querySelector('#activityTable tbody');
+    if (!tableBody) return;
 
-calendarModal.addEventListener("click", (e) => {
-    if (e.target === calendarModal) {
-        calendarModal.style.display = "none";
-        closeCalendarButton.style.display = "none";
+    const hasSaved = localStorage.getItem('savedActivities');
+    if (hasSaved) {
+        document.getElementById('clearButtonWrapper').style.display = 'block';
+    }
+  
+    const savedActivities = JSON.parse(localStorage.getItem('savedActivities')) || [];
+    if (savedActivities.length === 0) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 5;
+      cell.textContent = 'ยังไม่มีการบันทึกกิจกรรม';
+      row.appendChild(cell);
+      tableBody.appendChild(row);
+    } else {
+      savedActivities.forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${entry.date}</td>
+            <td>${entry.activityType}</td>
+            <td>${entry.mood}</td>
+            <td>${entry.genre}</td>
+            <td>${entry.activity}</td>
+        `;
+        tableBody.appendChild(row);
+      });
     }
 });
 
-closeCalendarButton.addEventListener("click", () => {
-    calendarModal.style.display = "none";
-    closeCalendarButton.style.display = "none";
-});
-
-function generateCalendar() {
-    calendarTable.innerHTML = "<tr><th>วันที่</th><th>กิจกรรม</th></tr>";
-    savedActivities.forEach(entry => {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td>${entry.date}</td><td>${entry.activity}</td>`;
-        calendarTable.appendChild(row);
-    });
-}
-
-function getYouTubeVideoId(url) {
-    const urlObj = new URL(url);
-    if (urlObj.hostname === 'youtu.be') {
-        return urlObj.pathname.slice(1);
-    } else if (urlObj.hostname.includes('youtube.com')) {
-        return urlObj.searchParams.get('v');
+function clearActivities() {
+    if (confirm("คุณแน่ใจหรือไม่ว่าต้องการลบกิจกรรมทั้งหมด?")) {
+      localStorage.removeItem('savedActivities');
+      location.reload();
     }
-    return null;
 }

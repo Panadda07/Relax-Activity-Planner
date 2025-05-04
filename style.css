@@ -1,7 +1,6 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #dbe6e4, #f1f5f2);
-    color: #3d5245;
+    font-family: 'Prompt', sans-serif;
+    background: #fff5f7;
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,162 +8,221 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
-    transition: background 0.5s ease;
 }
 
-main {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 500px;
+.card {
+    background-color: #ffeef2;
+    border-radius: 24px;
+    padding: 4rem 2.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 480px;
+    position: relative;
 }
 
-select {
-    width: 100%;
-    padding: 12px 40px 12px 12px;
-    margin: 10px 0;
-    border: 1px solid #a8c3b0;
-    border-radius: 8px;
-    font-size: 1em;
-    background: #f7faf9;
+h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5rem;
+    color: #2c4b3d;
+    margin: 0.5rem 0;
+}
+
+h1 span {
+    font-size: 2rem;
+    display: block;
+}
+
+.subtitle {
+    font-size: 1.1rem;
     color: #3d5245;
-    font-weight: 500;
-    transition: 0.3s;
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg fill="%233d5245" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 24px;
-    cursor: pointer;
-}
-
-select:hover {
-    background-color: #c8ddd4;
-}
-
-select:focus {
-    outline: none;
-    border-color: #8bb49c;
-    box-shadow: 0 0 8px #c1e3d0;
-    background-color: #c8ddd4;
-}
-
-select:focus:not(:hover) {
-    background-color: #f7faf9;
+    margin-bottom: 2rem;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
     border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    background: #2f684e;
-    color: #e6f5ec;
-    font-weight: 600;
+    border-radius: 18px;
     cursor: pointer;
-    transition: 0.3s;
+    background-color: #8bbfe0;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Prompt', sans-serif;
+    width: 100%;
+    max-width: 280px;
 }
 
 button:hover {
-    background: #24513d;
-    transform: scale(1.05);
+    background-color: #78b0d4;
+    transform: scale(1.03);
 }
 
-.result {
-    margin-top: 20px;
-    background: rgba(139, 180, 156, 0.15);
-    padding: 20px;
-    border-radius: 10px;
-    display: none;
-    color: #3d5245;
+.index-buttons,
+.hidden-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
 }
 
-#calendar-toggle {
+.dropdowns {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Prompt', sans-serif;
+    max-width: 100%;
+    background-color: #fff;
+    color: #333;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 50 l60 60 60-60' stroke='%233d5245' stroke-width='20' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+.result-box {
+    background-color: #fff;
+    border: 2px dashed #8bbfe0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #2c4b3d;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+#calendarButton {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #2f684e;
+    background-color: #f0f0f0;
     border: none;
+    font-size: 28px;
+    padding: 12px 16px;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    text-decoration: none;
+    color: #000;
     z-index: 999;
+    transition: background-color 0.3s;
 }
 
-#calendar-icon {
-    color: #fff;
-    font-size: 30px;
+#calendarButton:hover {
+    background-color: #dcdcdc;
 }
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+#backButton,
+#saveButton {
+    background-color: #8bbfe0;
+    color: white;
 }
 
-.modal-content {
-    background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 90%;
+.saved-container {
     max-width: 800px;
-    max-height: 90%;
-    overflow-y: auto;
+    margin: 4rem auto;
+    background-color: #ffeef2;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Prompt', sans-serif;
 }
 
-#calendar-table {
+.saved-container h2 {
+    text-align: center;
+    color: #2c4b3d;
+    margin-bottom: 2rem;
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
+    font-family: 'Prompt', sans-serif;
 }
 
-#calendar-table th,
-#calendar-table td {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    padding: 15px;
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
     text-align: center;
-    cursor: pointer;
 }
 
-#calendar-table td {
-    border: 1px solid #ddd;
-}
-
-#save-button {
-    font-size: 18px;
-    margin-top: 20px;
-    display: none;
-}
-
-#close-calendar {
-    background-color: #3d5245;
+th {
+    background-color: #8bbfe0;
     color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
 }
 
-#close-calendar:hover {
-    background-color: #2e3c34;
+tr:nth-child(even) {
+    background-color: #fdf6f8;
 }
+
+tr:hover {
+    background-color: #f0f8ff;
+}
+
+#backButton {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#backButton:hover {
+    background-color: #78b0d4;
+}
+
+#clearButton {
+    background-color: #8bbfe0;
+    color: white;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Prompt', sans-serif;
+    font-size: 1.2rem;
+    max-width: 280px;
+    width: 100%;
+}
+
+#clearButton:hover {
+    background-color: #78b0d4;
+}
+
+.decor {
+    position: absolute;
+  }
+  
+  .flower {
+    left: 10px;
+    bottom: 20px;
+    width: 40px;
+  }
+  
+  .cat {
+    right: 10px;
+    bottom: 10px;
+    width: 80px;
+  }
